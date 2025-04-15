@@ -50,13 +50,15 @@ def predict():
 
         preds = model.predict(img_array)
         predicted_class = class_names[np.argmax(preds)]
-        confidence = round(np.max(preds) * 100, 2)
+
+        # ✅ Fix: Convert confidence to Python float for JSON serialization
+        confidence = float(np.max(preds) * 100)
 
         os.remove(filepath)
 
         return jsonify({
             'prediction': predicted_class,
-            'confidence': confidence
+            'confidence': round(confidence, 2)
         })
 
     except Exception as e:
