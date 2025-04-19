@@ -1,3 +1,4 @@
+from flask_cors import CORS
 from flask import Flask, request, jsonify
 import os
 import numpy as np
@@ -5,7 +6,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
-
+CORS(app)
 # Load your trained model
 model = load_model('crop_disease_model_combined_data_augmentation.h5')
 
